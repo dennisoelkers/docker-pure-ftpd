@@ -21,6 +21,9 @@ then
     pure-pw mkdb /etc/pure-ftpd/pureftpd.pdb -f "$PASSWD_FILE"
 fi
 
+mkdir /etc/pure-ftpd/conf
+echo "yes" > /etc/pure-ftpd/conf/CallUploadScript
+
 # detect if using TLS (from volumed in file) but no flag set, set one
 if [ -e /etc/ssl/private/pure-ftpd.pem ] && [[ "$PURE_FTPD_FLAGS" != *"--tls"* ]]
 then
@@ -135,6 +138,9 @@ then
     echo "Setting default max connections per ip to: $FTP_MAX_CONNECTIONS"
     PURE_FTPD_FLAGS="$PURE_FTPD_FLAGS -C $FTP_MAX_CONNECTIONS"
 fi
+
+echo "Starting pure-uploadscript:"
+exec /usr/sbin/pure-uploadscript -r /upload_script.sh &
 
 # let users know what flags we've ended with (useful for debug)
 echo "Starting Pure-FTPd:"
