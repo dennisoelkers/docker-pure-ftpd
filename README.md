@@ -1,17 +1,8 @@
-Docker Pure-ftpd Server
-============================
-https://hub.docker.com/r/stilliard/pure-ftpd/
+Docker FTP to Dropbox Gateway
+================================
+Based on https://hub.docker.com/r/stilliard/pure-ftpd/.
 
-[![Build Status](https://travis-ci.org/stilliard/docker-pure-ftpd.svg?branch=master)](https://travis-ci.org/stilliard/docker-pure-ftpd)
-[![Docker Build Status](https://img.shields.io/docker/build/stilliard/pure-ftpd.svg)](https://hub.docker.com/r/stilliard/pure-ftpd/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/stilliard/pure-ftpd.svg)](https://hub.docker.com/r/stilliard/pure-ftpd/)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fstilliard%2Fdocker-pure-ftpd.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fstilliard%2Fdocker-pure-ftpd?ref=badge_shield)
-[![Sponsor Project](https://img.shields.io/badge/%E2%99%A5-Sponsor_Project-blueviolet)](https://github.com/sponsors/stilliard)
-
-
-----------------------------------------
-
-#### Check out our [basic example workflow](https://github.com/stilliard/docker-pure-ftpd/wiki/Basic-example-walk-through) & our [slightly more advanced workflow with tls & an auto created user](https://github.com/stilliard/docker-pure-ftpd/wiki/Advanced-example-walk-through-with-TLS-&-automatic-user-account).
+This docker image sets up an FTP server (using pure-ftpd) that puts all uploaded files and puts them in your Dropbox.
 
 ----------------------------------------
 
