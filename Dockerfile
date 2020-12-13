@@ -23,7 +23,7 @@ RUN mkdir /tmp/pure-ftpd/ && \
 	cd /tmp/pure-ftpd/ && \
 	apt-get source pure-ftpd && \
 	cd pure-ftpd-* && \
-	./configure --with-tls | grep -v '^checking' | grep -v ': Entering directory' | grep -v ': Leaving directory' && \
+	./configure --with-tls --with-uploadscript | grep -v '^checking' | grep -v ': Entering directory' | grep -v ': Leaving directory' && \
 	sed -i '/CAP_SYS_NICE,/d; /CAP_DAC_READ_SEARCH/d; s/CAP_SYS_CHROOT,/CAP_SYS_CHROOT/;' src/caps_p.h && \
 	dpkg-buildpackage -b -uc | grep -v '^checking' | grep -v ': Entering directory' | grep -v ': Leaving directory'
 
@@ -48,7 +48,8 @@ RUN apt-get -y update && \
     openbsd-inetd \
     openssl \
     perl \
-	rsyslog
+	rsyslog \
+	curl
 
 COPY --from=builder /tmp/pure-ftpd/*.deb /tmp/pure-ftpd/
 
@@ -76,6 +77,17 @@ RUN echo "" >> /etc/rsyslog.conf && \
 # setup run/init file
 COPY run.sh /run.sh
 RUN chmod u+x /run.sh
+
+# copy dropbox uploader
+COPY dropbox_upload.sh /dropbox_upload.sh
+RUN chmod u+x /dropbox_upload.sh
+
+# copy upload script
+COPY upload_script.sh /upload_script.sh
+RUN chmod u+x /upload_script.sh
+
+RUN apt update
+RUN apt install ca-certificates
 
 # cleaning up
 RUN apt-get -y clean \
